@@ -1,0 +1,9 @@
+<ng-container>
+    <div mat-dialog-content class="content">
+        <div>Are you sure you want to claim this issue?</div>
+    </div>
+    <div mat-dialog-actions class="actions">
+        <button mat-button (click)="onCancel()">Cancel</button>
+        <button mat-button (click)="onOk()" cdkFocusInitial>Claim Issue</button>
+    </div>
+</ng-container>

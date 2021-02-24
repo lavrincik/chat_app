@@ -1,0 +1,28 @@
+<mat-drawer-container class="container">
+
+  <mat-drawer 
+    class="drawer" 
+    #sidebar 
+    mode="side" 
+    position="end" 
+    disableClose 
+    [opened]="opened" 
+    mode="side" 
+    autoFocus="false"
+  >
+
+    <div>
+      <app-head ></app-head>
+      <app-body [appContexts]="appContexts"></app-body>
+    </div>
+
+  </mat-drawer>
+
+  <mat-drawer-content>
+
+    <ng-content></ng-content>
+    <app-windows></app-windows>
+
+  </mat-drawer-content>
+
+</mat-drawer-container>

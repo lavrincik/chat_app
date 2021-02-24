@@ -1,0 +1,12 @@
+<ng-container>
+    <div mat-dialog-content class="content">
+        <mat-form-field class="example-form-field">
+            <mat-label>Message</mat-label>
+            <input matInput type="text" [(ngModel)]="input">
+          </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="actions">
+        <button mat-button (click)="onCancel()">Cancel</button>
+        <button mat-button (click)="onOk()" cdkFocusInitial>Edit</button>
+    </div>
+</ng-container>

@@ -1,0 +1,39 @@
+<ng-container>
+    <ng-container *ngIf="isIssue(); else textInput">
+        <div 
+            class="claim_issue" 
+            (click)="openClaimIssueDialog()"
+            matRipple
+        >
+            Claim Issue
+        </div>
+    </ng-container>
+    <ng-template #textInput>
+        <div class="wrapper">
+            <div class="textarea_wrapper">
+                <textarea 
+                    #textarea
+                    class="textarea" 
+                    appAutoResize 
+                    type="text" 
+                    placeholder="Write message..." 
+                    required 
+                    (keydown.enter)="sendMessage(textarea.value);false"
+                    autofocus
+                    [(ngModel)]="textareaValue"
+                    [disabled]="isChatTypeClosed()"
+                >
+                </textarea>
+            </div>
+            <div class="icons_row">
+                <mat-icon 
+                    class="send_icon" 
+                    (click)="sendMessage(textarea.value)" 
+                    svgIcon="send"
+                    matTooltip="Send Message"
+                    matTooltipPosition="above"
+                ></mat-icon>
+            </div>
+        </div>
+    </ng-template>
+</ng-container>

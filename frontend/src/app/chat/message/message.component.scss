@@ -1,0 +1,125 @@
+@import "../../../variables.scss";
+    
+.message_wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.message_wrapper_user {
+  word-wrap: break-word;
+  border-radius: 7px 7px 7px 7px;
+  background-color: $primary;
+  width: fit-content;
+  max-width: 190px;
+  margin: 2px 0px 0px 0px;
+  padding: 5px 12px 5px 12px;
+  cursor: pointer;
+}
+
+.message_user {
+  font-size: 0.82em;
+  color: #FFFFFF;
+}
+
+.message_head_user {
+  margin: 0px 0px 0px auto;
+  font-size: 0.72em;
+  color: #DCDCDC;
+}
+
+.message_wrapper_other_user {
+  word-wrap: break-word;
+  border-radius: 7px 7px 7px 7px;
+  background-color: #E0E0E0;
+  width: fit-content;
+  max-width: 190px;
+  margin: 2px auto 0px 5px;
+  padding: 5px 12px 5px 12px;
+  cursor: pointer;
+}
+
+.message_other_user {
+  font-size: 0.82em;
+}
+
+.message_head_other_user {
+  margin: 0px auto 0px 0px;
+  font-size: 0.72em;
+  color: #808080;
+}
+
+.message_status_wrapper {
+  display: flex;
+  align-items: flex-end;
+  width: 18px;
+}
+
+.message_status_icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  margin: 0px auto 0px auto;
+  fill: #505050;
+}
+
+.more_icon {
+  align-self: center;
+  margin: 0px 12px 0px 12px;
+  &:hover {
+    cursor: pointer;
+    fill: #808080;
+  }
+}
+
+.more_wrapper {
+  position: relative;
+}
+
+.more {
+  position: absolute;
+  left: -40px;
+  bottom: -8px;
+}
+
+.more_buttons {
+  display: flex;
+  justify-content: center;
+  border: 2px solid #E0E0E0;
+  border-radius: 5px;
+  height: 25px;
+}
+
+.more_button {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7em;
+  padding: 0px 10px 0px 10px;
+  z-index: 1;
+  width: 30px;
+  &:hover {
+    cursor: pointer;
+    background-color: #E0E0E0;
+  }
+}
+
+.arrow_down {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #E0E0E0;
+  z-index: 1;
+  margin: auto;
+}
+
+.message_deleted {
+  color: #DCDCDC;
+  font-style: italic;
+}
+
+.other_message_deleted {
+  color: #808080;
+  font-style: italic;
+}

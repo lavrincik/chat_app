@@ -1,0 +1,54 @@
+@import "../../../variables.scss";
+  
+.claim_issue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 61px;
+    background-color: $primary;
+    font-weight: 500;
+    color: #FFFFFF;
+    &:hover {
+        background-color: #039ae5ab;
+        cursor: pointer;
+    }
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.textarea_wrapper {
+    padding: 5px;
+}
+
+.textarea {
+    height: 16px;
+    width: 100%;
+    border: none;
+    resize: none;
+    &:focus {
+        outline: none;
+    }
+}
+
+.icons_row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0px 0px 5px 0px;
+    background-color: #FFFFFF;
+}
+
+.send_icon {
+    margin: 0px 5px 0px 0px;
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+    &:hover {
+        fill: #808080;
+        cursor: pointer;
+    }
+}

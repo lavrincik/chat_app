@@ -1,0 +1,14 @@
+<div *ngIf="message.open" [@openMessage]>
+    <div *ngIf="someStateSeen()" class="message_open">
+        <mat-icon class="message_open_icon" svgIcon="visibility"></mat-icon>
+        <div class="message_open_text">
+            Seen by {{ stateSeenNames() }}
+        </div>
+    </div>
+    <div *ngIf="someStateDelivered()" class="message_open">
+        <mat-icon class="message_open_icon" svgIcon="check-filled"></mat-icon>
+        <div class="message_open_text">
+            Delivered to {{ stateDeliveredNames() }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div 
+    class="closed" 
+    (click)="toggleWindow()"
+>
+    <div class="name_wrapper">
+        <span class="name">
+            {{ getChatName(chat) }}
+        </span>
+        <span *ngIf="showContext()" class="context">
+            {{ chat.appContext }}
+        </span>
+    </div>
+    <mat-icon 
+        class="close_icon" 
+        (click)="closeWindow()" 
+        svgIcon="clear"
+        matTooltip="Close Chat Window"
+        matTooltipPosition="above"
+    ></mat-icon>
+</div>

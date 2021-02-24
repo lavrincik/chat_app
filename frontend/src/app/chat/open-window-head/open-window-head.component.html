@@ -1,0 +1,80 @@
+<ng-container>
+    <div class="wrapper" (click)="toggleChat()">
+        <div class="name_wrapper">
+            <span class="name">
+                {{ getChatName() }}
+            </span>
+            <span *ngIf="showContext()" class="context">
+                {{ chat.appContext }}
+            </span>
+        </div>
+        <mat-menu #settingsMenu="matMenu" yPosition="above">
+            <button 
+                mat-menu-item
+                (click)="openFind()"
+            >
+                Search in conversation
+            </button>
+            <button 
+                mat-menu-item 
+                *ngIf="isEmployeeAndIssue()" 
+                [disabled]="!isChatTypeOpen()"
+                (click)="openCloseIssueDialog()"
+            >
+                Close Issue
+            </button>
+        </mat-menu>
+        <div>
+            <mat-icon
+                #settingsIcon
+                class="icon" 
+                (click)="settings($event)"
+                svgIcon="settings"
+                matTooltip="Settings"
+                matTooltipPosition="above"
+                [matMenuTriggerFor]="settingsMenu"
+            >
+                
+            </mat-icon>
+            <mat-icon 
+                class="icon" 
+                (click)="closeChat($event)" 
+                svgIcon="clear"
+                matTooltip="Close Chat Window"
+                matTooltipPosition="above"
+            ></mat-icon>
+        </div>
+    </div>
+
+    <div *ngIf="findOpen" class="find">
+        <input 
+            #pattern 
+            type="text" 
+            (keyup.enter)="findNext(pattern.value)"
+            class="find_input"
+            placeholder="Search..." 
+        >
+        <div class="find_border"></div>
+        <mat-icon 
+            class="arrow_down_icon"
+            (click)="!arrowDownValid || findPrevious(pattern.value)" 
+            svgIcon="arrow-down"
+            (mouseover)="hover = true" 
+            (mouseleave)="hover = false"
+            [ngStyle]="{
+                'fill': hover ? '#808080' : arrowDownValid ? '#000000' : '#808080',
+                'cursor': hover && arrowDownValid ? 'pointer' : 'null'
+            }"
+        ></mat-icon>
+        <mat-icon 
+            class="find_icon" 
+            (click)="findNext(pattern.value)" 
+            svgIcon="arrow-up"
+        ></mat-icon>
+        <mat-icon 
+            class="find_icon" 
+            (click)="closeFind()"
+            svgIcon="clear"
+        ></mat-icon>
+    </div>
+</ng-container>

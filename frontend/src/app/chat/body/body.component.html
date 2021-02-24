@@ -1,0 +1,192 @@
+<ng-container>
+
+  <div class="progress_spinner" *ngIf="chats === undefined; else elseTemplate">
+    <mat-progress-spinner [diameter]="60" [strokeWidth]="4" mode="indeterminate"></mat-progress-spinner>
+  </div>
+
+  <ng-template #elseTemplate> 
+    <div class="chatlist">
+      <ng-container *ngIf="isUserEmployee()">
+
+        <div class="header" (click)="toogleOpenIssues()">
+          <div class="header_text">
+            Your Open Issues
+          </div>
+          <mat-icon
+            *ngIf="openHeader.openIssues"
+            class="header_drop_icon" 
+            svgIcon="arrow-drop-down"
+          ></mat-icon>
+          <mat-icon
+            *ngIf="!openHeader.openIssues"
+            class="header_drop_icon" 
+            svgIcon="arrow-drop-up"
+          ></mat-icon>
+        </div>
+        <ng-container *ngIf="openHeader.openIssues">
+          <div *ngFor="let chat of chats" class="chats">
+            <div 
+              *ngIf="isChatTypeOpen(chat)"  
+              matRipple 
+              class="chat" 
+              (click)="openWindow(chat.id)"
+            >
+              <div class="name_wrapper">
+                <span class="name">
+                  {{ getChatName(chat) }}
+                </span>
+                <span class="context">
+                  {{ chat.appContext }}
+                </span>
+              </div>
+              <div 
+                *ngIf="isChatPrivate(chat.users)" 
+                class="dot" 
+                [style.background-color]="userConnected(chat.users) ? onlineDot : offlineDot"
+              ></div>
+            </div> 
+          </div>
+        </ng-container>
+
+        <mat-divider class="divider"></mat-divider>
+
+        <div class="header" (click)="toogleUnassigned()">
+          <div class="header_text">
+            Unassigned
+          </div>
+          <mat-icon
+            *ngIf="openHeader.unassigned"
+            class="header_drop_icon" 
+            svgIcon="arrow-drop-down"
+          ></mat-icon>
+          <mat-icon
+            *ngIf="!openHeader.unassigned"
+            class="header_drop_icon" 
+            svgIcon="arrow-drop-up"
+          ></mat-icon>
+        </div>
+        <ng-container *ngIf="openHeader.unassigned">
+          <div *ngFor="let context of getAppContexts()">
+            <div class="sub_header" (click)="toogleUnassignedContext(context)">
+              <div class="header_text">
+                {{ context }}
+              </div>
+              <mat-icon
+                *ngIf="openHeader.unassignedContexts[context]"
+                class="header_drop_icon" 
+                svgIcon="arrow-drop-down"
+              ></mat-icon>
+              <mat-icon
+                *ngIf="!openHeader.unassignedContexts[context]"
+                class="header_drop_icon" 
+                svgIcon="arrow-drop-up"
+              ></mat-icon>
+            </div>
+            <ng-container *ngIf="openHeader.unassignedContexts[context]">
+              <div 
+                *ngFor="let chat of chats" 
+                class="chats" 
+              >
+                <ng-container *ngIf="chat.appContext === context">
+                  <div 
+                    *ngIf="isChatTypeUnassigned(chat)"  
+                    class="chat" 
+                    matRipple
+                    (click)="openWindow(chat.id)"
+                  >
+                    <div class="name_wrapper">
+                      <span class="name">
+                        {{ getChatName(chat) }}
+                      </span>
+                    </div>
+                    <div 
+                      class="dot" 
+                      [style.background-color]="clientConnected(chat.users) ? onlineDot : offlineDot"
+                    ></div>
+                  </div> 
+                </ng-container>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+
+        <mat-divider class="divider"></mat-divider>
+
+        <div class="header" (click)="toogleEmployees()">
+          <div class="header_text">
+            Logex
+          </div>
+          <mat-icon
+            *ngIf="openHeader.employees"
+            class="header_drop_icon" 
+            svgIcon="arrow-drop-down"
+          ></mat-icon>
+          <mat-icon
+            *ngIf="!openHeader.employees"
+            class="header_drop_icon" 
+            svgIcon="arrow-drop-up"
+          ></mat-icon>
+        </div>
+        <ng-container *ngIf="openHeader.employees">
+          <div *ngFor="let chat of chats" class="chats">
+            <div 
+              *ngIf="isChatTypeEmployee(chat)"  
+              class="chat" 
+              matRipple
+              (click)="openWindow(chat.id)"
+            >
+              <div class="name_wrapper">
+                <span class="name">
+                  {{ getChatName(chat) }}
+                </span>
+              </div>
+              <div class="numberCircle" *ngIf="chat.unreadMessages > 0">
+                {{ chat.unreadMessages > 99 ? "99+" : chat.unreadMessages }}
+              </div>
+              <div 
+                *ngIf="isChatPrivate(chat.users)" 
+                class="dot" 
+                [style.background-color]="userConnected(chat.users) ? onlineDot : offlineDot"
+              ></div>
+            </div> 
+          </div>
+        </ng-container>
+
+      </ng-container>
+
+      <ng-container *ngIf="isUserClient()">
+        <div class="chats">
+
+        <ng-container *ngFor="let chat of chats">
+          <div matRipple class="chat" (click)="openWindow(chat.id)">
+            <div class="name_wrapper">
+              <span class="name">
+                {{ getChatName(chat) }}
+              </span>
+            </div>
+            <div 
+              class="numberCircle" 
+              *ngIf="chat.unreadMessages > 0"
+              [style.margin-right]="'10px'"
+            >
+              {{ chat.unreadMessages > 99 ? "99+" : chat.unreadMessages }}
+            </div>
+          </div>
+        </ng-container>
+
+      </div>
+
+      <mat-divider class="divider"></mat-divider>
+
+      <app-contact-support 
+        [chats]="chats" 
+        [appContexts]="appContexts"
+        class="contact_support"
+      ></app-contact-support>
+
+    </ng-container>
+
+    </div>
+  </ng-template>
+
+</ng-container>

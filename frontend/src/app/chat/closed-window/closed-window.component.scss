@@ -1,0 +1,42 @@
+.closed {
+  height: 38px;
+  width: 250px;
+  border-radius: 6px 6px 0px 0px;
+  box-shadow: 0px 0px 10px 1px rgba(180,180,180, 0.5);
+  margin: 0px 12px 0px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFFFFF;
+  &:hover {
+    background-color: #F0F0F0;
+    cursor: pointer;
+  }
+}
+
+.close_icon {
+  margin: 0px 10px 0px 0px;
+  &:hover {
+    fill: #808080;
+    cursor: pointer;
+  } 
+}
+
+.name_wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 0px 0px 10px;
+}
+
+.name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden ;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+.context {
+  font-size: 0.75em;
+  color: #505050;
+}

@@ -1,0 +1,11 @@
+.wrapper {
+  position: fixed;
+  bottom: 0;
+  right: 220px;
+}
+
+.windows {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+}

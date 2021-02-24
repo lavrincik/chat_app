@@ -1,0 +1,98 @@
+<div class="message_wrapper">
+    <ng-container *ngIf="isUser(); else otherUser">
+        <mat-icon
+            *ngIf="message.open"
+            class="more_icon" 
+            svgIcon="more"
+            matTooltip="More"
+            matTooltipPosition="above"
+            [matTooltipDisabled]="moreOpen"
+            (click)="toogleMore()"
+        >
+            <div class="more_wrapper">
+                <div *ngIf="moreOpen" class="more" [@openMessage]>
+                    <div class="more_buttons">
+                        <div 
+                            class="more_button"
+                            (click)="editMessage()"
+                        >Edit</div>
+                        <div 
+                            class="more_button"
+                            (click)="deleteMessage()"
+                        >Delete</div>
+                    </div>
+                    <div class="arrow_down"></div>
+                </div>
+            </div>
+        </mat-icon>
+        <div 
+            class="message_wrapper_user" 
+            (click)="onMessageClick()"
+            matTooltip="Message Details"
+            matTooltipPosition="above"
+        >
+            <div class="message_head_user">
+                <div>
+                    {{ "me" }}
+                </div>
+            </div>
+            <div *ngIf="messageDeleted(); else userMessage" class="message_user message_deleted">
+                Message Deleted
+            </div>
+            <ng-template #userMessage>
+                <div
+                    class="message_user" 
+                    [innerHTML]="messageText() | appHighlight: searchPattern">
+                </div>
+            </ng-template>
+        </div>
+    </ng-container>
+    <ng-template #otherUser>
+        <div 
+            class="message_wrapper_other_user" 
+            (click)="onMessageClick()"
+            matTooltip="Message Details"
+            matTooltipPosition="above"
+        >
+            <div class="message_head_other_user">
+                <div>
+                    {{ message.user.name }}
+                </div>
+            </div>
+            <div *ngIf="messageDeleted(); else otherUserMessage" class="message_other_user other_message_deleted">
+                Message Deleted
+            </div>
+            <ng-template #otherUserMessage>
+                <div 
+                    class="message_other_user" 
+                    [innerHTML]="messageText() | appHighlight: searchPattern">
+                </div>
+            </ng-template>
+        </div>
+    </ng-template>
+    <ng-container [ngSwitch]="messageState()">
+        <div class="message_status_wrapper">
+            <mat-icon
+                *ngSwitchCase="'sent'"
+                class="message_status_icon" 
+                svgIcon="check-outlined"
+                matTooltip="Sent"
+                matTooltipPosition="above"
+            ></mat-icon>
+            <mat-icon
+                *ngSwitchCase="'delivered'"
+                class="message_status_icon" 
+                svgIcon="check-filled"
+                matTooltip="Delivered"
+                matTooltipPosition="above"
+            ></mat-icon>
+            <mat-icon
+                *ngSwitchCase="'seen'"
+                class="message_status_icon" 
+                svgIcon="visibility"
+                matTooltip="Seen"
+                matTooltipPosition="above"
+            ></mat-icon>
+        </div>
+    </ng-container>
+</div>

@@ -1,0 +1,42 @@
+<div class="window">
+    <app-open-window-head 
+        [chat]="chat"
+    ></app-open-window-head>
+
+    <div class="messages_textarea_wrapper">
+        <div class="top_spinner_wrapper" *ngIf="spinner">
+            <mat-spinner diameter="20"></mat-spinner>
+        </div>
+        <div 
+            class="messages_wrapper" 
+            (scroll)="onScroll($event)" 
+            #messages 
+            (mouseover)="onMouseover()"
+        >
+            <div class="messages_info">
+                This is the start of the conversation.
+            </div>
+
+            <div *ngFor="let message of chat.messages; let i=index" class="messages">
+                <app-message-open-top [message]="message"></app-message-open-top>
+                <app-message 
+                    [message]="message" 
+                    [messageIndex]="i"
+                    [usersSeen]="usersSeen"
+                    (addUserSeen)="onAddUserSeen($event)"
+                    [attr.id]="'message-' + message.id"
+                    [searchPattern]="searchPattern"
+                    [chatType]="chat.type"
+                ></app-message>
+                <app-message-open-bottom [message]="message"></app-message-open-bottom>
+            </div>
+
+            <div class="messages_info" *ngIf="isChatTypeClosed()">
+                Chat is closed.
+            </div>
+
+            <div class="messages_end_spacer"></div>
+        </div>
+        <app-open-window-footer [chat]="chat"></app-open-window-footer>
+  </div>
+</div>

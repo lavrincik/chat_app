@@ -1,0 +1,25 @@
+.chat_button {
+  border-radius: 0px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.test_interface {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+}
+
+.form_field {
+  margin: 0px 10px 0px 10px;
+}
+
+.users_form {
+  height: 450px;
+  overflow-y: scroll;
+}

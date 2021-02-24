@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+username=$( node dbinitScripts/getOrmconfigValue.js username )
+password=$( node dbinitScripts/getOrmconfigValue.js password )
+database=$( node dbinitScripts/getOrmconfigValue.js database )
+host=$( node dbinitScripts/getOrmconfigValue.js host )
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -u | --username )       shift
+                                username=$1
+                                node dbinitScripts/setOrmconfigValue.js -u ${username}
+                                ;;
+        -p | --password )       shift
+                                password=$1
+                                node dbinitScripts/setOrmconfigValue.js -p ${password}
+                                ;;
+        -d | --database )       shift
+                                database=$1
+                                node dbinitScripts/setOrmconfigValue.js -d ${database}
+                                ;;
+        -h | --host )           shift
+                                host=$1
+                                node dbinitScripts/setOrmconfigValue.js -h ${host}
+                                ;;
+    esac
+    shift
+done
+
+echo -e "username: ${username}\npassword: ${password}\ndatabase: ${database}\nhost: ${host}"
+
+disableFkCheck='SET FOREIGN_KEY_CHECKS=0;'
+enableFkCheck='SET FOREIGN_KEY_CHECKS=1;'
+
+echo ">>> DISABLE FK CHECK"
+mysql -u ${username} -p${password} -h ${host} -e "${disableFkCheck}"
+
+echo ">>> DELETE DATABASE"
+mysql -u ${username} -p${password} -h ${host} -e "DROP DATABASE IF EXISTS ${database};"
+
+echo ">>> CREATE DATABASE"
+mysql -u ${username} -p${password} -h ${host} -e "CREATE SCHEMA ${database} DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+
+echo ">>> ENABLE FK CHECK"
+mysql -u ${username} -p${password} -h ${host} -e "${enableFkCheck}"
+
+npm run clean
+npm run build
+npm run typeorm migration:generate -- -n InitialMigration
+npm run clean
+npm run build
+npm run typeorm migration:run
+
+exit 0

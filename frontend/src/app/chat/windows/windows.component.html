@@ -1,0 +1,17 @@
+<div class="wrapper" [style.right]="chatsPosition">
+    <div class="windows">
+        <ng-container *ngFor="let chat of chats; trackBy: trackByFn">
+            <app-closed-window
+                *ngIf="chat.windowColapsed && !chat.windowHidden"
+                [chat]="chat"
+            >
+            </app-closed-window>
+
+            <app-open-window
+                *ngIf="!chat.windowColapsed && !chat.windowHidden"
+                [chat]="chat"
+            >
+            </app-open-window>
+        </ng-container>
+    </div>
+</div>

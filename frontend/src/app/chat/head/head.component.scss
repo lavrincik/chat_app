@@ -1,0 +1,21 @@
+@import "../../../variables.scss";
+
+.head {
+    display: flex;
+    align-self: flex-start;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: $primary;
+}
+
+.button {
+    cursor: pointer;
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
+.button_icon {
+    width: 16px;
+    height: auto;
+}

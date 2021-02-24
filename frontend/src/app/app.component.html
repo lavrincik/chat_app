@@ -1,0 +1,124 @@
+<app-chat [user]="thisUser" [appContexts]="contexts">
+
+      <div class="test_interface">
+            <h3>Login to chat as user</h3> 
+            <form (ngSubmit)="onSubmitThisUser()" #userForm="ngForm">
+                  <mat-form-field appearance="standard" class="form_field">
+                        <mat-label>User id</mat-label>
+                        <input 
+                              [(ngModel)]="thisUser.id" 
+                              matInput 
+                              required 
+                              placeholder="User id"
+                              type="number"
+                              name="id"
+                        >
+                  </mat-form-field>
+                  <mat-form-field appearance="standard" class="form_field">
+                        <mat-label>User name</mat-label>
+                        <input 
+                              [(ngModel)]="thisUser.name" 
+                              matInput   
+                              required   
+                              placeholder="User name" 
+                              type="text"
+                              name="name"
+                        >
+                  </mat-form-field>
+                  <mat-form-field appearance="standard" class="form_field">
+                        <mat-label>User role</mat-label>
+                        <mat-select
+                              [(ngModel)]="thisUser.role"
+                              name="role"
+                              #role="ngModel"
+                              required
+                        >
+                              <mat-option 
+                                    *ngFor="let role of roles" 
+                                    [value]="role"
+                              >
+                                    {{ role }}
+                              </mat-option>
+                        </mat-select>
+                  </mat-form-field>
+                  <button 
+                        type="submit" 
+                        [disabled]="!userForm.form.valid" 
+                        mat-stroked-button
+                  > 
+                        Submit 
+                  </button>
+            </form>
+
+            <h3>Refresh chat users</h3>
+            <form (ngSubmit)="onSubmitUsers()" #usersForm="ngForm" class="users_form">
+                  <ng-container *ngFor="let user of users">
+                        <mat-form-field appearance="standard" class="form_field">
+                              <mat-label>User id</mat-label>
+                              <input 
+                                    [(ngModel)]="user.id" 
+                                    matInput 
+                                    required 
+                                    placeholder="User id"
+                                    type="number"
+                                    name="id-{{user.id}}"
+                              >
+                        </mat-form-field>
+                        <mat-form-field appearance="standard" class="form_field">
+                              <mat-label>User name</mat-label>
+                              <input 
+                                    [(ngModel)]="user.name" 
+                                    matInput   
+                                    required   
+                                    placeholder="User name" 
+                                    type="text"
+                                    name="name-{{user.id}}"
+                              >
+                        </mat-form-field>
+                        <mat-form-field appearance="standard" class="form_field">
+                              <mat-label>User role</mat-label>
+                              <mat-select
+                                    [(ngModel)]="user.role"
+                                    name="role-{{user.id}}"
+                                    #role="ngModel"
+                                    required
+                              >
+                                    <mat-option 
+                                          *ngFor="let role of roles" 
+                                          [value]="role"
+                                    >
+                                          {{ role }}
+                                    </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                  </ng-container>
+                  <button 
+                        type="submit" 
+                        [disabled]="!usersForm.form.valid" 
+                        mat-stroked-button
+                  > 
+                        Submit 
+                  </button>
+            </form>
+
+            <div>
+                  <button 
+                        (click)="addUser()"
+                        mat-stroked-button
+                  > 
+                        Add User
+                  </button>
+                  <button 
+                        (click)="removeLastUser()"
+                        mat-stroked-button
+                  > 
+                        Remove Last User
+                  </button>
+            </div>
+      </div> 
+
+      <button mat-flat-button class="chat_button" (click)="toogleChat()" color="primary">
+            <span>Chat</span>
+      </button>
+
+</app-chat>

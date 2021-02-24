@@ -1,0 +1,19 @@
+.message_open {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4px 0px 4px 0px;
+}
+
+.message_open_icon {
+    font-size: 12px;
+    width: 12px;
+    height: 12px;
+    margin: 0px 2px 0px 2px;
+    fill: #505050;
+}
+
+.message_open_text {
+    font-size: 0.75em;
+    color: #505050;
+}

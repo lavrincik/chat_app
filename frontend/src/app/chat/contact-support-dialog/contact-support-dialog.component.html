@@ -1,0 +1,17 @@
+<ng-container>
+    <div mat-dialog-content class="content">
+        <div class="select_label">What is the context of your issue?</div>
+        <mat-form-field class="select">
+            <mat-label>Context</mat-label>
+            <mat-select [(ngModel)]="appContext">
+                <mat-option *ngFor="let context of unusedContexts" [value]="context">
+                    {{ context }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="actions">
+        <button mat-button (click)="onCancel()">Cancel</button>
+        <button mat-button (click)="onOk()" cdkFocusInitial>Open Chat Window</button>
+    </div>
+</ng-container>
