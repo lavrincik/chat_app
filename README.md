@@ -1,6 +1,6 @@
 # Chat
 
-Chat application for Logex.
+Chat application
 
 ## Running
 
